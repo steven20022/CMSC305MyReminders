@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {View, Text, Pressable, SafeAreaView} from 'react-native';
 import styles from './styles';
 
 const HomeScreen = () => {
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
@@ -26,7 +28,7 @@ const HomeScreen = () => {
       <View style={styles.bottom}>
         <Pressable
           style={styles.button}
-          onPress={() => console.log('Get Reminders!')}>
+          onPress={() => {console.log('Get Reminders!'); navigation.navigate('Reminders/Priorities')}}>
           <Text style={styles.buttonText}>Get Reminders!</Text>
         </Pressable>
       </View>
