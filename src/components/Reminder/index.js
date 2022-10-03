@@ -15,8 +15,10 @@ const Reminder = props => {
         <TouchableOpacity style={styles.touchable} onPress={onPress}>
             <View style={{flex: 2}}>
                 <Text style={styles.title} numberOfLines={1}>{post.title}</Text>
-                <Text style={styles.date} numberOfLines={1}>{post.date}</Text>
                 <Text style={styles.description} numberOfLines={1}>{post.description}</Text>
+            </View>
+            <View style={{flex: 1}}>
+                <Text style={styles.date} numberOfLines={1}>{post.date}</Text>
             </View>
         </TouchableOpacity>
     </View>

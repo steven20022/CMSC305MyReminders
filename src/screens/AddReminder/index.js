@@ -18,12 +18,12 @@ const AddReminder = props => {
             alert('Please enter reminders title.');
             return;
         }
-        if (!date){
-            alert('Please enter reminders date.');
-            return;
-        }
         if (!description){
             alert('Please enter reminders description.');
+            return;
+        }
+        if (!date){
+            alert('Please enter a date in format MM-DD-YYYY.');
             return;
         }
 
@@ -34,7 +34,6 @@ const AddReminder = props => {
         }
 
         alert(title + ' Added!');
-        navigation.navigate('Reminders/Priorities');
     }
 
   return (
@@ -61,7 +60,7 @@ const AddReminder = props => {
                 onChangeText={value => setDate(value)}
                 style={styles.date}
                 clearButtonMode={'while-editing'}
-                placeholder={'Enter Date'}
+                placeholder={'Enter Date in format MM-DD-YYYY'}
                 placeholderTextColor={'grey'}
             />
         </View>
