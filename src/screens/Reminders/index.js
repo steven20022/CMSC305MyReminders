@@ -74,8 +74,7 @@ const RemindersScreen = props => {
         <View style={styles.bottom}>
             <TouchableOpacity 
                 style={styles.button}
-                onPress={() => navigation.navigate('Add Reminder')}
-                >
+                onPress={() => navigation.navigate('Add Reminder')}>
                 <Text style={styles.buttonText}>Add Reminder</Text>
             </TouchableOpacity>
         </View>
