@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     paddingBottom: 5,
   },
-  level: {
+  title: {
     fontSize: 18,
     marginLeft: 10,
     flex: 1,
     flexWrap: 'wrap',
     fontWeight: 'bold',
   },
-  name: {
+  description: {
     fontSize: 18,
     marginLeft: 10,
     flex: 1,

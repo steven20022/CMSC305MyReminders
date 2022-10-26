@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, FlatList } from 'react-native';
+import Reminder from '../../components/Reminder';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import Reminder from '../../components/Reminder';
 // import openDatabase hook
 import { openDatabase } from "react-native-sqlite-storage";
 
@@ -14,13 +14,14 @@ const RemindersScreen = props => {
 
   const navigation = useNavigation();
 
-  const [reminder, setReminder] = useState([]);
+  const [reminders, setReminders] = useState([]);
 
   useEffect(() => {
     const listener = navigation.addListener('focus', () => {
-      // declare an empty array to store the results from the SELECT
-      let results = []
-      // declare a transaction that will execute the SELECT
+      // declare an empty array that will store the results of the
+      // SELECT
+      let results = [];
+      // declare a transation that will execute the SELECT
       myRemindersDB.transaction(txn => {
         // execute SELECT
         txn.executeSql(
@@ -33,25 +34,25 @@ const RemindersScreen = props => {
             let len = res.rows.length;
             console.log('Length of reminders ' + len);
             // if more than one row was returned
-            if (len > 0) {
+            if (len > 0){
               // loop through the rows
-              for (let i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++){
                 // push a row of data at a time onto the
                 // results array
-                let item = res.rows.item(i)
+                let item = res.rows.item(i);
                 results.push({
                   id: item.id,
                   title: item.title,
                   description: item.description,
-                  date: item.date
-                })
+                  date: item.date,
+                });
               }
-              // assign results array to reminder state variable
-              setReminder(results);
+              // assign results array to lists state variable
+              setReminders(results);
             } else {
-              // if no rows of data were returned
-              // set reminder state variable to an empty array
-              setReminder([])
+              // if no rows of data were returned,
+              // set lists state variable to an empty array
+              setReminders([]);
             }
           },
           error => {
@@ -67,14 +68,16 @@ const RemindersScreen = props => {
     <View style={styles.container}>
       <View>
         <FlatList 
-          data={reminder}
+          data={reminders}
           renderItem={({item}) => <Reminder post={item} />}
+          keyExtractor={item => item.id}
         />
       </View>
         <View style={styles.bottom}>
             <TouchableOpacity 
                 style={styles.button}
-                onPress={() => navigation.navigate('Add Reminder')}>
+                onPress={() => navigation.navigate('Add Reminder')}
+                >
                 <Text style={styles.buttonText}>Add Reminder</Text>
             </TouchableOpacity>
         </View>

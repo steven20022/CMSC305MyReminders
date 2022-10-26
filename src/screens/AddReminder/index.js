@@ -10,30 +10,31 @@ const AddReminder = props => {
     const navigation = useNavigation();
 
     const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
+    const [date, setDate] = useState('');
 
     const onReminderAdd = () => {
         if (!title){
-            alert('Please enter reminders title.');
+            alert('Please enter a reminder title.');
             return;
         }
         if (!description){
-            alert('Please enter reminders description.');
+            alert('Please enter a reminder description.');
             return;
         }
         if (!date){
-            alert('Please enter a date in format MM-DD-YYYY.');
+            alert('Please enter a reminder date in format MM-DD-YYYY.');
             return;
         }
-
+        
         try {
             database.addReminder(title, description, date);
         } catch (error) {
-            console.log('Error adding Reminder ' + error);
+            console.log('Error adding reminder ' + error);
         }
 
         alert(title + ' Added!');
+        //navigation.navigate('Get Reminders!');
     }
 
   return (
@@ -44,7 +45,7 @@ const AddReminder = props => {
                 onChangeText={value => setTitle(value)}
                 style={styles.title}
                 clearButtonMode={'while-editing'}
-                placeholder={'Enter Title'}
+                placeholder={'Enter Reminder Title'}
                 placeholderTextColor={'grey'}
             />
             <TextInput 
@@ -52,7 +53,7 @@ const AddReminder = props => {
                 onChangeText={value => setDescription(value)}
                 style={styles.description}
                 clearButtonMode={'while-editing'}
-                placeholder={'Enter Description'}
+                placeholder={'Enter Reminder Description'}
                 placeholderTextColor={'grey'}
             />
             <TextInput 
@@ -60,7 +61,7 @@ const AddReminder = props => {
                 onChangeText={value => setDate(value)}
                 style={styles.date}
                 clearButtonMode={'while-editing'}
-                placeholder={'Enter Date in format MM-DD-YYYY'}
+                placeholder={'Enter Reminder Date in format MM-DD-YYYY'}
                 placeholderTextColor={'grey'}
             />
         </View>
