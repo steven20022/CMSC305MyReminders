@@ -82,7 +82,7 @@ module.exports = {
         (await myRemindersDB).transaction(txn => {
             // execute the SQL
             txn.executeSql(
-                `INSERT INTO ${prioritiesTableName} (title, description, date) VALUES ("${title}", "${description}")`,
+                `INSERT INTO ${prioritiesTableName} (title, description) VALUES ("${title}", "${description}")`,
                 // arguments passed when using SQL prepared statements
                 [],
                 // callback function to handle results of SQL query
