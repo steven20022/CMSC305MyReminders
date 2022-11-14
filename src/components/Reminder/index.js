@@ -1,12 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
 const Reminder = props => {
 
+    const navigation = useNavigation();
     const post = props.post;
 
     const onPress = () => {
+        navigation.navigate('Existing Reminder', {post: post})
         console.log(post.title);
     }
 

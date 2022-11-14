@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text, FlatList } from 'react-native';
-import Priority from '../../components/Priority';
 import { useNavigation } from '@react-navigation/native';
-import styles from './styles';
-// import openDatabase hook
+import React, { useEffect, useState } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { openDatabase } from "react-native-sqlite-storage";
+import { FlatList } from 'react-native-gesture-handler';
+import Priority from '../../components/Priority';
+import styles from '../Home/styles';
 
 // use hook to create database
 const myRemindersDB = openDatabase({name: 'MyReminders.db'});
 const prioritiesTableName = 'priorities';
+const reminderPrioritiesTableName = 'reminder_priorities';
 
-const PrioritiesScreen = props => {
+const ViewReminderPriority = props => {
+
+  const post = props.route.params.post;
 
   const navigation = useNavigation();
 
@@ -18,14 +21,14 @@ const PrioritiesScreen = props => {
 
   useEffect(() => {
     const listener = navigation.addListener('focus', () => {
-      // declare an empty array that will store the results of the
-      // SELECT
-      let results = [];
-      // declare a transation that will execute the SELECT
+      // declare an empty array to store the results from the SELECT
+      let results = []
+      // declare a transaction that will execute the SELECT
       myRemindersDB.transaction(txn => {
         // execute SELECT
         txn.executeSql(
-          `SELECT * FROM ${prioritiesTableName}`,
+          `SELECT priorities.id, title, description FROM ${prioritiesTableName}, 
+          ${reminderPrioritiesTableName} WHERE priorities.id = priority AND reminder = ${post.id}`,
           [],
           // callback function to handle the results from the
           // SELECT s
@@ -72,16 +75,8 @@ const PrioritiesScreen = props => {
           keyExtractor={item => item.id}
         />
       </View>
-        <View style={styles.bottom}>
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={() => navigation.navigate('Add Priority')}
-                >
-                <Text style={styles.buttonText}>Add Priority</Text>
-            </TouchableOpacity>
-        </View>
     </View>
   );
 };
 
-export default PrioritiesScreen;
+export default ViewReminderPriority;

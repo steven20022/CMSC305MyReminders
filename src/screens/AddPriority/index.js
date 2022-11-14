@@ -9,7 +9,7 @@ const AddPriority = props => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-    const onReminderAdd = () => {
+    const onPriorityAdd = () => {
         if (!title){
             alert('Please enter a priority title.');
             return;
@@ -36,7 +36,7 @@ const AddPriority = props => {
                 onChangeText={value => setTitle(value)}
                 style={styles.title}
                 clearButtonMode={'while-editing'}
-                placeholder={'Enter Priority Title'}
+                placeholder={'Enter Reminder Title'}
                 placeholderTextColor={'grey'}
             />
             <TextInput 
@@ -44,12 +44,12 @@ const AddPriority = props => {
                 onChangeText={value => setDescription(value)}
                 style={styles.description}
                 clearButtonMode={'while-editing'}
-                placeholder={'Enter Priority Description'}
+                placeholder={'Enter Reminder Description'}
                 placeholderTextColor={'grey'}
             />
         </View>
         <View style={styles.bottomContainer}>
-            <Pressable style={styles.button} onPress={onReminderAdd}>
+            <Pressable style={styles.button} onPress={onPriorityAdd}>
                 <Text style={styles.buttonText}>Add</Text>
             </Pressable>
         </View>

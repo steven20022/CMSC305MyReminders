@@ -10,7 +10,9 @@ import { openDatabase } from "react-native-sqlite-storage";
 const myRemindersDB = openDatabase({name: 'MyReminders.db'});
 const prioritiesTableName = 'priorities';
 
-const PrioritiesScreen = props => {
+const AddReminderPriorityScreen = props => {
+
+  const post = props.route.params.post
 
   const navigation = useNavigation();
 
@@ -44,6 +46,7 @@ const PrioritiesScreen = props => {
                   id: item.id,
                   title: item.title,
                   description: item.description,
+                  reminder_id: post.id
                 });
               }
               // assign results array to lists state variable
@@ -63,6 +66,8 @@ const PrioritiesScreen = props => {
     return listener;
   });
 
+console.log(priorities);
+
   return (
     <View style={styles.container}>
       <View>
@@ -72,16 +77,8 @@ const PrioritiesScreen = props => {
           keyExtractor={item => item.id}
         />
       </View>
-        <View style={styles.bottom}>
-            <TouchableOpacity 
-                style={styles.button}
-                onPress={() => navigation.navigate('Add Priority')}
-                >
-                <Text style={styles.buttonText}>Add Priority</Text>
-            </TouchableOpacity>
-        </View>
     </View>
   );
 };
 
-export default PrioritiesScreen;
+export default AddReminderPriorityScreen;
